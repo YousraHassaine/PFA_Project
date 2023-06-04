@@ -3,15 +3,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-class HomeController extends AbstractController
+class ContactController extends AbstractController
 {
     //home.index c'est le nom de la route;
-    #[Route('/', name:'home.index')]
+    #[Route('/contact', name:'contact.index')]
     public function index(): Response
     { 
-        return $this->render('home.html.twig');
+        return $this->render('contact.html.twig');
     }
 
     
 }
-// twig: moteur de template de symfony
