@@ -13,13 +13,13 @@ class HomeController extends AbstractController
         return $this->render('home.html.twig');
     }
 
-    #[Route('/Afficher', name: 'details_products')]
+    /*#[Route('/Afficher', name: 'details_products')]
     public function Afficher(Request $request): Response
     {
         dd($request);
 
         return $this->render('details_products/index.html.twig');
-    }
+    }*/
 
     
 }

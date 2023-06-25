@@ -103,13 +103,10 @@
                 </div>
             </div>
             <!-- End Side Menu -->
-
         </nav>
-
-
-
         <div class="banner-area responsive-auto-height text-small">
-            <div class="item shadow dark text-light bg-fixed" style="background-image: url(assets/img/2440x1578.png);">
+            <div class="item shadow dark text-light bg-fixed" style="background-image: url(assets/img/4.jpg);"  >
+               
                 <div class="box-table">
                     <div class="box-cell">
                         <div class="container">
@@ -130,7 +127,7 @@
                                             <div class="heading">
                                                 <h2>Make an Appointment</h2>
                                             </div>
-                                            <form action="#">
+                                            <form action="{{ path('TrouveDoctor') }}" method="post">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -173,11 +170,6 @@
                 </div>
             </div>
         </div>
-
-        
-
-
-
         <div class="fun-fact-area default-padding shadow light text-center bg-fixed text-light" style="background-image: url(assets/img/2440x1578.png);">
             <div class="container">
                 <div class="row">
@@ -218,7 +210,7 @@
     <div class="chose-us-area item-half">
         <div class="container-full">
             <div class="row">
-                <div class="col-md-6 thumb bg-cover" style="background-image: url(assets/img/1.jpg);"></div>
+                <div class="col-md-6 thumb bg-cover" style="background-image: url(assets/img/WHY_CHOSE_US.jpg);"></div>
                 <div class="col-md-6 info">
                     <div class="heading">
                         <h2>Why Chose us</h2>
@@ -286,7 +278,7 @@
                     <div class="single-item">
                         <div class="col-md-5">
                             <div class="thumb">
-                                <img src="assets/img/1.jpg" alt="">
+                                <img src="{{ asset('assets/img/CONSEILSSANTÉ1.jpg') }}" alt="">
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -314,7 +306,7 @@
                     <div class="single-item">
                         <div class="col-md-5">
                             <div class="thumb">
-                                <img src="assets/img/1.jpg" alt="">
+                                <img src="{{ asset('assets/img/CONSEILSSANTÉ2.jpg') }}" alt="">
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -342,7 +334,7 @@
                     <div class="single-item">
                         <div class="col-md-5">
                             <div class="thumb">
-                                <img src="assets/img/800x800.png" alt="">
+                                <img src="{{ asset('assets/img/CONSEILSSANTÉ3.jpg') }}" alt="">
                             </div>
                         </div>
                         <div class="col-md-7">

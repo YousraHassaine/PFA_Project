@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!
         {% endblock %}</title>
 
-         <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="MediHub - Medical & Health Template">
@@ -13,8 +14,8 @@
     <!-- ========== Page Title ========== -->
     <title>MediHub - Medical & Health Template</title>
 
-	
- <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
+
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <!-- ========== Start Stylesheet ========== -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
@@ -35,31 +36,32 @@
 
 
 
-      {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-        
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
     {% include('partials/_preloader.html.twig') %}
     <!-- header-start -->
     {% include('partials/_header.html.twig') %}
-        {% block body %}
-        {% endblock %}
-    
-      
+    {% block body %}
+    {% endblock %}
+
+
 
     <!-- JS here -->
 
-    
-     <!-- footer-start -->
-      
- <!-- jQuery Frameworks
+
+    <!-- footer-start -->
+
+    <!-- jQuery Frameworks
     ============================================= -->
     <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -79,6 +81,6 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
-    </body>
-  
+</body>
+
 </html>
