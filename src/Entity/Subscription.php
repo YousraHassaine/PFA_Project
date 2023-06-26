@@ -15,15 +15,18 @@ class Subscription
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'subscription', targetEntity: Doctor::class)]
-    private String $libelle;
-
     #[ORM\Column]
     private ?float $tarif = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\OneToMany(mappedBy: 'subscription', targetEntity: Doctor::class, orphanRemoval: true)]
+    private Collection $doctors;
+
     public function __construct()
     {
-        $this->libelle = new ArrayCollection();
+        $this->doctors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -31,35 +34,6 @@ class Subscription
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Doctor>
-     */
-    public function getLibelle(): Collection
-    {
-        return $this->libelle;
-    }
-
-    public function addLibelle(Doctor $libelle): self
-    {
-        if (!$this->libelle->contains($libelle)) {
-            $this->libelle->add($libelle);
-            $libelle->setSubscription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLibelle(Doctor $libelle): self
-    {
-        if ($this->libelle->removeElement($libelle)) {
-            // set the owning side to null (unless already changed)
-            if ($libelle->getSubscription() === $this) {
-                $libelle->setSubscription(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getTarif(): ?float
     {
@@ -69,6 +43,48 @@ class Subscription
     public function setTarif(float $tarif): self
     {
         $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Doctor>
+     */
+    public function getDoctors(): Collection
+    {
+        return $this->doctors;
+    }
+
+    public function addDoctor(Doctor $doctor): self
+    {
+        if (!$this->doctors->contains($doctor)) {
+            $this->doctors->add($doctor);
+            $doctor->setSubscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoctor(Doctor $doctor): self
+    {
+        if ($this->doctors->removeElement($doctor)) {
+            // set the owning side to null (unless already changed)
+            if ($doctor->getSubscription() === $this) {
+                $doctor->setSubscription(null);
+            }
+        }
 
         return $this;
     }

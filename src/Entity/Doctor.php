@@ -16,8 +16,11 @@ class Doctor extends User
     #[ORM\Column]
     private ?bool $disponibilite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'libelle')]
+    #[ORM\ManyToOne(inversedBy: 'doctors')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
+
+
 
     public function getId(): ?int
     {
@@ -47,4 +50,5 @@ class Doctor extends User
 
         return $this;
     }
+
 }

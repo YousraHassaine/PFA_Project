@@ -1,0 +1,6 @@
+<select name="speciality">
+{% for speciality in specialities %}
+    <option value='{{ speciality.id  }}'> {{ speciality.nomSpeciality}} </option>
+{% endfor %}
+</select>
+

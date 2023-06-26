@@ -20,52 +20,36 @@
                         </div>
                         <form action="#">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <input class="form-control" id="f-name" name="f-name" placeholder="Nom *" type="text">
+                                    <label>Idetifiant<i class="text-danger">*</i></label>
+                                        <input class="form-control" id="f-name" name="f-name" placeholder="Identifiant" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Mot de passe<i class="text-danger">*</i></label>
+                                        <input class="form-control" id="l-lname" name="l-lname" placeholder="Mot de passe" type="password">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="l-lname" name="l-lname" placeholder="Prenom *" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="phone" name="phone" placeholder="Telephone" type="text">
-                                    </div>
-                                </div>
+                            </div>   
                                 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <select>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                            <option value="3">Child</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select>
-                                            <option value="1">Department</option>
-                                            <option value="2">Medecine</option>
-                                            <option value="4">Dental Care</option>
-                                            <option value="5">Traumatology</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group comments">
-                                        <textarea class="form-control" id="comments" name="comments" placeholder="Tell Us About Project *"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
+                            <div class="row">
+                               <div class="col-md-6">
                                     <button type="submit" name="submit" id="submit">
-                                    Valider   <i class="fa fa-paper-plane"></i>
+                                    Se connecter  <i class="fa fa-paper-plane"></i>
                                     </button>
                                 </div>
+                            
+                                <div class="col-md-6">
+                                    {# <button type="inscription" name="inscription" id="subscribe">
+                                inscrivez-vous  <i class="fa fa-paper-plane"></i>
+                                
+                                    </button>  #}
+                               <div style="margin-top: 25px;">
+                                <a class="register-button" href="{{ path('registerDoctor') }}" > s'inscrire</a>
+                                </div>
+                                </div>
                             </div>
+                    
                         </form>
                     </div>
                 </div>

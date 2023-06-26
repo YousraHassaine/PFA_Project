@@ -5974,4 +5974,31 @@ Table of contents
     background: url(assets/img/preloader.gif) center no-repeat #fff;
     text-align: center;
   }
+
+
+  .register-button{
+    background: transparent;
+    padding: 12px 35px 14px 35px;
+
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -ms-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+    color: green !important;
+    border: 2px solid green;
+    background: transparent;
+}
+
+.register-button:hover{
+
+    background: green;
+    color: #ffffff !important;
+    border: 2px solid transparent;
+}
   
