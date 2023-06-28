@@ -60,7 +60,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="{{ asset('assets/img/4.jpg') }}" width="15" height="15" class="logo" alt="Logo">
+                    <img src="{{ asset('assets/img/MyDoctor.png') }}" width="150" height="100" class="logo" alt="Logo">
                 </a>
             </div>
             <!-- End Header Navigation -->
@@ -69,7 +69,7 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
                     <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Home</a>
+                        <a href="{{path('home.index')}}" class="dropdown-toggle" data-toggle="dropdown" >Home</a>
                         <ul class="dropdown-menu">
                          
                             <li class="dropdown">
@@ -87,7 +87,7 @@
                    
                     
                     <li>
-                        <a href="contact.html">contact</a>
+                        <a href="{{path('contact.index')}}">contact</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
