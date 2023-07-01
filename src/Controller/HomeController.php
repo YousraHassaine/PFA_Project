@@ -21,9 +21,11 @@ class HomeController extends AbstractController
     public function recherche(Request $request, DoctorRepository $doctoor ): Response
     {
         $name = $request->request->get('name');// Récupérez le nom depuis la requête
-        $specialty = $request->request->get('spécialité');// Récupérez la spécialité depuis la requête
+      //  $specialty = $request->request->get('spécialité');// Récupérez la spécialité depuis la requête
         $city = $request->request->get('ville');// Récupérez la ville depuis la requête
-        $doctors = $doctoor->rechercherParNomVilleSpecialite($name, $specialty, $city);
+        $doctors = $doctoor->rechercherParNomVilleSpecialite($name, $city);
+        
+        
         dd($doctors);
         return $this->render('doctor/TrouverDoctor.html.twing');
 

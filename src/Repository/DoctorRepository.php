@@ -23,7 +23,7 @@ class DoctorRepository extends ServiceEntityRepository
     parent::__construct($registry, Doctor::class);
 }
     
-    public function rechercherParNomVilleSpecialite($nom, $ville, $specialite)
+    public function rechercherParNomVilleSpecialite($nom, $ville)
     {
         $queryBuilder = $this->createQueryBuilder('u');
 
@@ -38,10 +38,10 @@ class DoctorRepository extends ServiceEntityRepository
     
         }
 
-        if ($specialite) {
+       /* if ($specialite) {
             $queryBuilder->andWhere('u.Adresse = :Adresse')
             ->setParameter('Adresse', $specialite);
-        }
+        }*/
         return $queryBuilder->getQuery()->getResult();
     }
 

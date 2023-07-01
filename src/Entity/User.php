@@ -4,8 +4,16 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[InheritanceType("JOINED")]
+#[DiscriminatorColumn(name: 'type', type: 'string')]
+#[DiscriminatorMap(['doctor' => Doctor::class, 'patient' => Patient::class])]
 class User
 {
     #[ORM\Id]
