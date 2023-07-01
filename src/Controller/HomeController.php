@@ -4,14 +4,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\DoctorRepository;
+use Doctrine\Persistence\ManagerRegistry;
 class HomeController extends AbstractController
 {
+    
     //home.index c'est le nom de la route;
     #[Route('/', name:'home.index')]
     public function index(): Response
     { 
         return $this->render('home.html.twig');
     }
+
+
+    #[Route('/doctors', name:'home.recherche')]
+    public function recherche(Request $request, DoctorRepository $doctoor ): Response
+    {
+        $name = $request->request->get('name');// Récupérez le nom depuis la requête
+        $specialty = $request->request->get('spécialité');// Récupérez la spécialité depuis la requête
+        $city = $request->request->get('ville');// Récupérez la ville depuis la requête
+        $doctors = $doctoor->rechercherParNomVilleSpecialite($name, $specialty, $city);
+        dd($doctors);
+        return $this->render('doctor/TrouverDoctor.html.twing');
+
+    }
+
+
 
     /*#[Route('/Afficher', name: 'details_products')]
     public function Afficher(Request $request): Response

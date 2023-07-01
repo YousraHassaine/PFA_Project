@@ -6,6 +6,7 @@ use App\Entity\Doctor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Doctor>
  *
@@ -16,9 +17,32 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DoctorRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
+{
+    parent::__construct($registry, Doctor::class);
+}
+    
+    public function rechercherParNomVilleSpecialite($nom, $ville, $specialite)
     {
-        parent::__construct($registry, Doctor::class);
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        if ($nom) {
+            $queryBuilder->andWhere('u.Nom = :Nom')
+                ->setParameter('Nom', $nom);
+        }
+
+        if ($ville) {
+            $queryBuilder->andWhere('u.Ville = :Ville')
+                ->setParameter('Ville', $ville);
+    
+        }
+
+        if ($specialite) {
+            $queryBuilder->andWhere('u.Adresse = :Adresse')
+            ->setParameter('Adresse', $specialite);
+        }
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function save(Doctor $entity, bool $flush = false): void
@@ -38,7 +62,7 @@ class DoctorRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    
 //    /**
 //     * @return Doctor[] Returns an array of Doctor objects
 //     */
