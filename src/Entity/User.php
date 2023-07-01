@@ -42,6 +42,9 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $Ville = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $photp = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +130,18 @@ class User
     public function setVille(string $Ville): self
     {
         $this->Ville = $Ville;
+
+        return $this;
+    }
+
+    public function getPhotp(): ?string
+    {
+        return $this->photp;
+    }
+
+    public function setPhotp(string $photp): self
+    {
+        $this->photp = $photp;
 
         return $this;
     }

@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use App\Repository\DoctorRepository;
 use Doctrine\ORM\Mapping as ORM;
-#[ORM\Entity(repositoryClass: DoctorRepository::class)]
 
+#[ORM\Entity(repositoryClass: DoctorRepository::class)]
 class Doctor extends User
 {
     
@@ -17,9 +17,9 @@ class Doctor extends User
     #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Doctors')]
+    private ?Speciality $specialty = null;
 
-
-    
 
     public function isDisponibilite(): ?bool
     {
@@ -41,6 +41,18 @@ class Doctor extends User
     public function setSubscription(?Subscription $subscription): self
     {
         $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    public function getSpecialty(): ?speciality
+    {
+        return $this->specialty;
+    }
+
+    public function setSpecialty(?speciality $specialty): self
+    {
+        $this->specialty = $specialty;
 
         return $this;
     }

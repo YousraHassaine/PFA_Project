@@ -24,10 +24,10 @@ class HomeController extends AbstractController
       //  $specialty = $request->request->get('spécialité');// Récupérez la spécialité depuis la requête
         $city = $request->request->get('ville');// Récupérez la ville depuis la requête
         $doctors = $doctoor->rechercherParNomVilleSpecialite($name, $city);
-        
-        
-        dd($doctors);
-        return $this->render('doctor/TrouverDoctor.html.twing');
+       // dd($doctors);
+       return $this->render('doctor/TrouverDoctor.html.twig',[
+            'Doctors' => $doctors,
+       ]);
 
     }
 
