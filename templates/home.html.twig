@@ -51,12 +51,14 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <select name="spécialité">
-                                                        <option value="Allergologie">Allergologie</option>
+                                                {{ render(controller('App\\Controller\\DoctorController::getDoctorsSpecialities')) }}
+                                                    <!--select name="spécialité">
+                                                    
+                                                        <!option value="Allergologie">Allergologie</option>
                                                         <option value="Cardiologie">Cardiologie</option>
                                                         <option value="Dermatologie">Dermatologie</option>
                                                         <option value="Endocrinologie">Endocrinologie</option>
-                                                        <!--<option value="6">Gastro</option>
+                                                        <option value="6">Gastro</option>
                                                         <option value="7">Gynécologie</option>
                                                         <option value="8">Hématologie</option>
                                                         <option value="9">Néphrologie</option>
@@ -69,11 +71,11 @@
                                                         <option value="16">Psychiatrie</option>
                                                         <option value="17">Radiologie</option>
                                                         <option value="18">Rhumatologie</option>
-                                                        <option value="19">Urologie</option>-->
+                                                        <option value="19">Urologie</option>
 
 
 
-                                                    </select>
+                                                    </select>-->
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

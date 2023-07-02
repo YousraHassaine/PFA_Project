@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Repository\SpecialityRepository;
 use App\Repository\SubscriptionRepository;
+use App\Repository\DoctorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class DoctorController extends AbstractController
 {
@@ -57,6 +59,18 @@ class DoctorController extends AbstractController
             return $this->render('doctor/subsc.html.twig',[
                 "subscriptions" => $subscriptions
             ]);
+    }
+
+
+    #[Route('/doctor/detail/{id}', name: 'detail')]
+    public function getDoctorDetail(int $id, DoctorRepository $DoctorRepository): Response
+    {
+        $Details = $DoctorRepository->find($id);
+    
+        return $this->render('doctor/detail.html.twig',[
+            "Details" => $Details
+        ]);
+
     }
 
 }
