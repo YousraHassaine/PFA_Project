@@ -45,6 +45,15 @@ class User
     #[ORM\Column(length: 30)]
     private ?string $photp = null;
 
+    #[ORM\Column(length: 20)]
+    private ?string $Login = null;
+
+    #[ORM\Column(length: 30)]
+    private ?string $password = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $sexe = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,6 +151,42 @@ class User
     public function setPhotp(string $photp): self
     {
         $this->photp = $photp;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->Login;
+    }
+
+    public function setLogin(string $Login): static
+    {
+        $this->Login = $Login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): static
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

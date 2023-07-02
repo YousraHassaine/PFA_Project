@@ -8,6 +8,7 @@ use App\Repository\DoctorRepository;
 use Doctrine\Persistence\ManagerRegistry;
 class HomeController extends AbstractController
 {
+
     
     //home.index c'est le nom de la route;
     #[Route('/', name:'home.index')]

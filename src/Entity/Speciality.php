@@ -35,6 +35,13 @@ class Speciality
         return $this->nomSpeciality;
     }
 
+    public function setNomSpeciality(string $nomSpeciality): self
+    {
+        $this->nomSpeciality = $nomSpeciality;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Doctor>
      */
