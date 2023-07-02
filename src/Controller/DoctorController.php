@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\SpecialityRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\DoctorRepository;
+use App\Repository\InfosRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
