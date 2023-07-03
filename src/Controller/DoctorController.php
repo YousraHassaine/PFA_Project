@@ -110,11 +110,13 @@ class DoctorController extends AbstractController
     public function getDoctorDetail(int $id, DoctorRepository $DoctorRepository): Response
     {
         $Details = $DoctorRepository->find($id);
-    
+        //dd($Details);
         return $this->render('doctor/detail.html.twig',[
             "Details" => $Details
         ]);
 
     }
+
+
 
 }
