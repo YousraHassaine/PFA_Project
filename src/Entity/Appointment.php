@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Appointment
 
     #[ORM\ManyToOne(inversedBy: 'appointment')]
     private ?TypeRdv $typeRdv = null;
+
+    #[ORM\OneToMany(mappedBy: 'appointment', targetEntity: Patient::class)]
+    private Collection $Patient;
+
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    private ?Doctor $Doctor = null;
+
+    public function __construct()
+    {
+        $this->Patient = new ArrayCollection();
+    }
 
     
 
@@ -77,6 +90,48 @@ class Appointment
     public function setTypeRdv(?TypeRdv $typeRdv): self
     {
         $this->typeRdv = $typeRdv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Patient>
+     */
+    public function getPatient(): Collection
+    {
+        return $this->Patient;
+    }
+
+    public function addPatient(Patient $patient): static
+    {
+        if (!$this->Patient->contains($patient)) {
+            $this->Patient->add($patient);
+            $patient->setAppointment($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): static
+    {
+        if ($this->Patient->removeElement($patient)) {
+            // set the owning side to null (unless already changed)
+            if ($patient->getAppointment() === $this) {
+                $patient->setAppointment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDoctor(): ?Doctor
+    {
+        return $this->Doctor;
+    }
+
+    public function setDoctor(?Doctor $Doctor): static
+    {
+        $this->Doctor = $Doctor;
 
         return $this;
     }
