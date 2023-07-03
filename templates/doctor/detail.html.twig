@@ -57,8 +57,12 @@
                         <p>
                             Perceived determine departure explained no forfeited he something an. Contrasted dissimilar get joy you instrument out reasonably. Again keeps at no meant stuff. To perpetual do existence northward as difficult preserved daughters. Continued at up to zealously necessary breakfast. Surrounded sir motionless she end literature. Gay direction neglected but supported yet her. 
                         </p>
-                        <a class="btn btn-theme border btn-md" href="#">Make Appoinment</a>
-                         <input type="datetime-local"/>
+                        
+                        <form action="{{ path('PrendreRdv') }}" method="post">
+                            <input type="datetime-local" name="Date" />
+                            <button type="submit" class="btn btn-theme border btn-md" >Prendre un rendez-vous</button>
+                             </form>
+                         
                          <!-- Tab Nav -->
                         <ul class="nav nav-pills">
                             <li class="active">

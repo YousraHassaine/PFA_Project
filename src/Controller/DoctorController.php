@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Controller;
-
+use DateTimeImmutable;
 use App\Entity\Doctor;
 use App\Entity\Speciality;
 use App\Entity\Subscription;
+use App\Entity\Appointment;
 use App\Repository\SpecialityRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\DoctorRepository;
@@ -73,6 +74,29 @@ class DoctorController extends AbstractController
         return $this->render('doctor/register.html.twig');
     }
 
+
+    #[Route('/doctor/detail', name: 'PrendreRdv',methods: "POST")]
+    public function PrendreRdv(Request $request): Response
+    {
+        //dd($request);
+        $Appointment = new Appointment();
+        $createdAt = new DateTimeImmutable(($request->request->get("Date")));
+        $Appointment->setCreatedAt($createdAt);
+        $Appointment->setHeureDebut($createdAt);
+        $Appointment->setHeureFin($createdAt);
+        
+        $TypeRdv=$entityManage->getRepository(TypeRdv::class)->find(1);
+        $Appointment->setTypeRdv($TypeRdv);
+
+        $entityManage->persist($Appointment);
+        $entityManage->flush();
+
+        
+        
+
+    }
+    
+
     #[Route('/Doctor/fintrouverDoctord', name: 'trouveDoctor')]
     public function trouverDoctor(): Response
     {
@@ -116,6 +140,8 @@ class DoctorController extends AbstractController
         ]);
 
     }
+
+   
 
 
 
