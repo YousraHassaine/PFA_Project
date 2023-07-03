@@ -57,12 +57,45 @@
                         <p>
                             Perceived determine departure explained no forfeited he something an. Contrasted dissimilar get joy you instrument out reasonably. Again keeps at no meant stuff. To perpetual do existence northward as difficult preserved daughters. Continued at up to zealously necessary breakfast. Surrounded sir motionless she end literature. Gay direction neglected but supported yet her. 
                         </p>
-                        
-                        <form action="{{ path('PrendreRdv') }}" method="post">
-                            <input type="datetime-local" name="Date" />
-                            <button type="submit" class="btn btn-theme border btn-md" >Prendre un rendez-vous</button>
-                             </form>
-                         
+
+
+                        <div class="widget appoinment mt-3">
+                            <div class="title text-center bg-success w-75">
+                                <h4 _msttexthash="380120" _msthash="84">Prendre rendez-vous</h4>
+
+                            </div>
+                            <div class="appoinment-box">
+                                <form action="{{ path('PrendreRdv',{id:Details.id})}}" method="post">
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label> Heure Debut</label>
+                                                <input class="form-control"  name="heureDebut" type="datetime-local">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label> Heure Fin</label>
+                                                <input class="form-control"  name="heureFin" type="datetime-local">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                {{ render(controller('App\\Controller\\TypeRDVController::PrendreRdvType')) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" name="submit" id="submit">
+                                                Prendre un RDV <i class="fa fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                          <!-- Tab Nav -->
                         <ul class="nav nav-pills">
                             <li class="active">

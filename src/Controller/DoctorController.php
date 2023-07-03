@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\TypeRdv;
 use DateTimeImmutable;
 use App\Entity\Doctor;
 use App\Entity\Speciality;
@@ -39,7 +40,6 @@ class DoctorController extends AbstractController
     #[Route('/Doctor/register', name: 'registerDoctorForm')]
     public function registerForm(): Response
     {
-
         return $this->render('doctor/register.html.twig');
     }
     #[Route('/Doctor/Insrire', name: 'registerDoctor',methods: "POST")]
@@ -73,37 +73,48 @@ class DoctorController extends AbstractController
         $entityManage->flush();
         return $this->render('doctor/register.html.twig');
     }
-
-
-    #[Route('/doctor/detail', name: 'PrendreRdv',methods: "POST")]
-    public function PrendreRdv(Request $request): Response
+    #[Route('/doctor/detail/{id}', name: 'PrendreRdv',methods: "POST")]
+    public function PrendreRdv(Request $request,int $id): Response
     {
         //dd($request);
         $Appointment = new Appointment();
-        $createdAt = new DateTimeImmutable(($request->request->get("Date")));
-        $Appointment->setCreatedAt($createdAt);
-        $Appointment->setHeureDebut($createdAt);
-        $Appointment->setHeureFin($createdAt);
-        
-        $TypeRdv=$entityManage->getRepository(TypeRdv::class)->find(1);
+      //  $createdAt = new DateTimeImmutable(($request->request->get("Date")));
+        //!!!!!Pour le champs de CreatedAt par defaut va prendre la date actuel;
+        $dateTime = new \DateTime();  // Obtenir la date et l'heure actuelles
+        $dateTimeImmutable = DateTimeImmutable::createFromMutable($dateTime);  // Créer un objet DateTimeImmutable à partir de DateTime
+
+        $Appointment->setCreatedAt($dateTimeImmutable);
+        $Appointment->setHeureDebut(new DateTimeImmutable(($request->request->get("heureDebut"))));
+        $Appointment->setHeureFin(new DateTimeImmutable(($request->request->get("heureFin"))));
+
+        //Voous pouvez creer des attribut de type int pour le foreign key et affecter la valeur diirectement  ce sont des attribut chadeau
+        $entityManage=$this->entityManager;
+        //Type Rdv
+        $TypeRdv=$entityManage->getRepository(TypeRdv::class)->find($request->request->get("typeRdv"));
         $Appointment->setTypeRdv($TypeRdv);
 
-        $entityManage->persist($Appointment);
-        $entityManage->flush();
+        //Doctor
+        //Id est passé comment attribut sur url
+        $Doctor=$entityManage->getRepository(Doctor::class)->find($id);
+        $Appointment->setDoctor($Doctor);
 
+
+        if($Appointment){
+            $entityManage->persist($Appointment);
+            $entityManage->flush();
+            return $this->render('home.html.twig');
+        }
+
+        return $this->render('doctor/trouverDoctor.html.twig');
         
         
 
     }
-    
-
     #[Route('/Doctor/fintrouverDoctord', name: 'trouveDoctor')]
     public function trouverDoctor(): Response
     {
         return $this->render('doctor/trouverDoctor.html.twig');
     }
-
-
     /**
      * action to get all specialities
      * 
@@ -114,8 +125,6 @@ class DoctorController extends AbstractController
     public function getDoctorsSpecialities(SpecialityRepository $specialityRepository): Response
     {
         $specialities = $specialityRepository->findAll();
-       
-
         return $this->render('doctor/spec.html.twig',[
             "specialities" => $specialities
         ]);
@@ -138,11 +147,6 @@ class DoctorController extends AbstractController
         return $this->render('doctor/detail.html.twig',[
             "Details" => $Details
         ]);
-
     }
-
-   
-
-
 
 }
