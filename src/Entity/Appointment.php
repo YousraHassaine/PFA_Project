@@ -28,16 +28,15 @@ class Appointment
     #[ORM\ManyToOne(inversedBy: 'appointment')]
     private ?TypeRdv $typeRdv = null;
 
-    #[ORM\OneToMany(mappedBy: 'appointment', targetEntity: Patient::class)]
-    private Collection $Patient;
+   
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     private ?Doctor $Doctor = null;
 
-    public function __construct()
-    {
-        $this->Patient = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    private ?Patient $Patient = null;
+
+   
 
     
 
@@ -94,36 +93,7 @@ class Appointment
         return $this;
     }
 
-    /**
-     * @return Collection<int, Patient>
-     */
-    public function getPatient(): Collection
-    {
-        return $this->Patient;
-    }
-
-    public function addPatient(Patient $patient): static
-    {
-        if (!$this->Patient->contains($patient)) {
-            $this->Patient->add($patient);
-            $patient->setAppointment($this);
-        }
-
-        return $this;
-    }
-
-    public function removePatient(Patient $patient): static
-    {
-        if ($this->Patient->removeElement($patient)) {
-            // set the owning side to null (unless already changed)
-            if ($patient->getAppointment() === $this) {
-                $patient->setAppointment(null);
-            }
-        }
-
-        return $this;
-    }
-
+   
     public function getDoctor(): ?Doctor
     {
         return $this->Doctor;
@@ -132,6 +102,18 @@ class Appointment
     public function setDoctor(?Doctor $Doctor): static
     {
         $this->Doctor = $Doctor;
+
+        return $this;
+    }
+
+    public function getPatient(): ?Patient
+    {
+        return $this->Patient;
+    }
+
+    public function setPatient(?Patient $Patient): static
+    {
+        $this->Patient = $Patient;
 
         return $this;
     }
