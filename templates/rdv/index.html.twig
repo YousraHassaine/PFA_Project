@@ -1,20 +1,65 @@
-{% extends 'base.html.twig' %}
+{% extends 'TemplateAdmin/layout.html.twig' %}
 
-{% block title %}Hello RDVController!{% endblock %}
+{% block title %}RDV{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <a asp-controller="Copropriete" asp-action="Add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Ajouter Coproprite</a>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/projet_pfa/src/Controller/RDVController.php'|file_link(0) }}">src/Controller/RDVController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/projet_pfa/templates/rdv/index.html.twig'|file_link(0) }}">templates/rdv/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    <div class="table-responsive">
+                        <table class="table align-middle table-nowrap table-check">
+                            <thead class="table-light">
+                            <tr>
+
+                                <th class="align-middle">Doctor</th>
+                                <th class="align-middle">Type RENDEZ-VOUS</th>
+                                <th class="align-middle">Date RENDEZ-VOUS</th>
+                                <th class="align-middle">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for appointment in appointments %}
+                            <tr>
+
+
+                                <td>{{ appointment.patient.nom }}</td>
+                                <td>
+                                    {{ appointment.doctor.nom }}
+                                </td>
+                                <td>
+                                    {{ appointment.heureDebut|time }}
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-3">
+                                        <a href="" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                        <a href="" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

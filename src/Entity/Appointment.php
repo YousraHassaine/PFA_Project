@@ -33,8 +33,8 @@ class Appointment
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     private ?Doctor $Doctor = null;
 
-    #[ORM\ManyToOne(inversedBy: 'appointments')]
-    private ?Patient $Patient = null;
+    #[ORM\ManyToOne(inversedBy:"appointments")]
+    private ?Patient $patient = null;
 
     //Atribut chadeau
     private ?int $patient_id;
@@ -124,12 +124,12 @@ class Appointment
 
     public function getPatient(): ?Patient
     {
-        return $this->Patient;
+        return $this->patient;
     }
 
     public function setPatient(?Patient $Patient): static
     {
-        $this->Patient = $Patient;
+        $this->patient = $Patient;
 
         return $this;
     }
