@@ -25,9 +25,6 @@ class Patient extends User
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Notice::class, orphanRemoval: true)]
     private Collection $Notice;
 
-    #[ORM\ManyToOne(inversedBy: 'Patient')]
-    private ?Appointment $appointment = null;
-
     #[ORM\OneToMany(mappedBy: 'Patient', targetEntity: Appointment::class)]
     private Collection $appointments;
 
@@ -95,19 +92,6 @@ class Patient extends User
 
         return $this;
     }
-
-    public function getAppointment(): ?Appointment
-    {
-        return $this->appointment;
-    }
-
-    public function setAppointment(?Appointment $appointment): static
-    {
-        $this->appointment = $appointment;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Appointment>
      */

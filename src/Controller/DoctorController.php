@@ -98,6 +98,8 @@ class DoctorController extends AbstractController
         $Doctor=$entityManage->getRepository(Doctor::class)->find($id);
         $Appointment->setDoctor($Doctor);
 
+        //Patient
+        $Appointment->setPatientId(1);
 
         if($Appointment){
             $entityManage->persist($Appointment);
