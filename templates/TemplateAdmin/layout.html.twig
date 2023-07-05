@@ -21,21 +21,20 @@
 <div id="layout-wrapper">
 
 
-{% include('TemplateAdmin/Cdn_Template_Admin/Header.html.twig') %}
+    {% include('TemplateAdmin/Cdn_Template_Admin/Header.html.twig') %}
 
-{% include('TemplateAdmin/Vertical_Menu.html.twig') %}
+    {% include('TemplateAdmin/Vertical_Menu.html.twig') %}
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
                 <!--Add Row-->
-
                 {% block body %}
                 {% endblock %}
 
 
             </div>
         </div>
-    {% include('TemplateAdmin/Cdn_Template_Admin/Fotter.html.twig') %}
+        {% include('TemplateAdmin/Cdn_Template_Admin/Fotter.html.twig') %}
     </div>
 
 </div>
