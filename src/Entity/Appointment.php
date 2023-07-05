@@ -34,9 +34,25 @@ class Appointment
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     private ?Patient $Patient = null;
 
-   
+    //Atribut chadeau
+    private ?int $patient_id;
 
-    
+    /**
+     * @return int|null
+     */
+    public function getPatientId(): ?int
+    {
+        return $this->patient_id;
+    }
+
+    /**
+     * @param int|null $patient_id
+     */
+    public function setPatientId(?int $patient_id): void
+    {
+        $this->patient_id = $patient_id;
+    }
+
 
     public function getId(): ?int
     {
