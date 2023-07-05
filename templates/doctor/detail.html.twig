@@ -55,44 +55,11 @@
                         <h2>{{   Details.Nom }} {{   Details.Prenom }}</h2>
                         <h4> {{   Details.specialty.nomSpeciality }} </h4>
                         <p>{{   Details.infos.presentation }}</p>
+                        <a class="btn btn-theme border btn-md" href="#">Prendre Rendez-vous</a>
 
 
-                        <div class="widget appoinment mt-3">
-                            <div class="title text-center bg-success w-75">
-                                <h4 _msttexthash="380120" _msthash="84">Prendre rendez-vous</h4>
 
-                            </div>
-                            <div class="appoinment-box">
-                                <form action="{{ path('PrendreRdv',{id:Details.id})}}" method="post">
-                                    <div class="row">
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label> Date Rendez-vous:</label>
-                                                <input class="form-control"  name="heureDebut" type="datetime-local">
-                                            </div>
-                                        </div>
-
-                                        <!--div class="col-md-12">
-                                            <div class="form-group">
-                                                <label> Heure Fin</label>
-                                                <input class="form-control"  name="heureFin" type="datetime-local">
-                                            </div>
-                                        </div-->
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                {{ render(controller('App\\Controller\\TypeRDVController::PrendreRdvType')) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" name="submit" id="submit">
-                                                Prendre un RDV <i class="fa fa-paper-plane"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                       
 
                          <!-- Tab Nav -->
                         <ul class="nav nav-pills">
