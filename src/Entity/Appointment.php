@@ -106,8 +106,26 @@ class Appointment
 
         return $this;
     }
+<<<<<<< Updated upstream
 
    
+=======
+    public function getPatient(): ?Patient
+    {
+        return $this->Patient;
+    }
+    public function setPatient(?Patient $Patient): static
+    {
+        $this->Patient = $Patient;
+
+        return $this;
+    }
+    
+
+    
+
+    
+>>>>>>> Stashed changes
     public function getDoctor(): ?Doctor
     {
         return $this->Doctor;
