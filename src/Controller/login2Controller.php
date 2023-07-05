@@ -3,9 +3,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use App\Repository\DoctorRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 class login2Controller extends AbstractController
 {

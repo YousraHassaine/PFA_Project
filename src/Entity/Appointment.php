@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -108,8 +106,26 @@ class Appointment
 
         return $this;
     }
+<<<<<<< Updated upstream
 
    
+=======
+    public function getPatient(): ?Patient
+    {
+        return $this->Patient;
+    }
+    public function setPatient(?Patient $Patient): static
+    {
+        $this->Patient = $Patient;
+
+        return $this;
+    }
+    
+
+    
+
+    
+>>>>>>> Stashed changes
     public function getDoctor(): ?Doctor
     {
         return $this->Doctor;
