@@ -108,7 +108,7 @@ class RDVController extends AbstractController
     #[Route('/rdv/delete/{id}', name: 'rdvDelete')]
     public function deleteRdv($id)
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager=$this->entityManager;
         $appointment = $entityManager->getRepository(Appointment::class)->find($id);
 
         if (!$appointment) {
