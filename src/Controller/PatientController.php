@@ -42,7 +42,7 @@ class PatientController extends AbstractController
 
             $session->set('patient_id', $patient);
             //dd($session->get('patient_id'));
-            return $this->render('test/index.html.twig');
+            return $this->redirectToRoute('rdv_index');
         }
         return $this->render('Patient/login.html.twig');
     }
