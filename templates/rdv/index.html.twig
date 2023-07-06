@@ -12,7 +12,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-4">
                         </div>
-                   
+
                     </div>
 
                     <div class="table-responsive">
@@ -20,8 +20,8 @@
                             <thead class="table-light">
                             <tr>
 
+                                <th class="align-middle">Patient</th>
                                 <th class="align-middle">Doctor</th>
-                                <th class="align-middle">Type RENDEZ-VOUS</th>
                                 <th class="align-middle">Date RENDEZ-VOUS</th>
                                 <th class="align-middle">Action</th>
                             </tr>
@@ -32,9 +32,11 @@
                                 <tr>
 
         
-                                    <td>{{ appointment.patient.nom }}</td>
+                                    <td>{{ appointment.patient.nom }}
+
+                                    </td>
                                     <td>
-                                        {{ appointment.doctor.nom }}
+                                        <img class="rounded-circle header-profile-user  h-25" src="{{asset('assets/img/'~appointment.Doctor.photp)}}" alt="">    {{ appointment.doctor.nom }}
                                     </td>
                                     <td>
                                         {{ appointment.createdAt|date('Y-m-d') }}  {{ appointment.heureDebut|date('H:i') }}
