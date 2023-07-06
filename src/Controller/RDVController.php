@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Appointment;
+use App\Entity\Doctor;
 use App\Entity\Patient;
+use App\Entity\TypeRdv;
 use App\Repository\AppointmentRepository;
 use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -32,6 +35,7 @@ class RDVController extends AbstractController
                 $patientId = $session->get('patient_id');
                 $patientId = $session->get('patient_id');
                 $appointments = $this->entityManager->getRepository(Appointment::class)->findBy(['Patient' => $patientId]);
+                //dd($appointments);
                 return $this->render('rdv/index.html.twig', [
                     'appointments' => $appointments,
                 ]);
@@ -51,6 +55,68 @@ class RDVController extends AbstractController
 
         return $this->render('Patient/login.html.twig');
     }
+    #[Route('/rdv/AddPost', name: 'PrendreRdv',methods: "POST")]
+    public function PrendreRdv(SessionInterface $session,Request $request): Response
+    {
+        //dd($request);
+        if ($session->has('patient_id')) {
+           // dd($request);
+            $Appointment = new Appointment();
+            $createdAt = new \DateTimeImmutable(($request->request->get("Date")));
+            $Appointment->setCreatedAt($createdAt);
+            $Appointment->setHeureDebut($createdAt);
+            $Appointment->setHeureFin($createdAt);
+            $entityManage=$this->entityManager;
+            $TypeRdv=$entityManage->getRepository(TypeRdv::class)->find(1);
+            //  $createdAt = new DateTimeImmutable(($request->request->get("Date")));
+            //!!!!!Pour le champs de CreatedAt par defaut va prendre la date actuel;
+            $dateTime = new \DateTime();  // Obtenir la date et l'heure actuelles
+            $dateTimeImmutable = \DateTimeImmutable::createFromMutable($dateTime);  // Créer un objet DateTimeImmutable à partir de DateTime
+
+            $Appointment->setCreatedAt($dateTimeImmutable);
+            $Appointment->setHeureDebut(new \DateTimeImmutable(($request->request->get("Date"))));
+            $Appointment->setHeureFin(new \DateTimeImmutable(($request->request->get("Date"))));
+
+            //Voous pouvez creer des attribut de type int pour le foreign key et affecter la valeur diirectement  ce sont des attribut chadeau
+            //Type Rdv
+            $TypeRdv=$entityManage->getRepository(TypeRdv::class)->find($request->request->get("typeRdv"));
+            $Appointment->setTypeRdv($TypeRdv);
+
+            //Doctor
+            $DoctorId=$session->get('Doctor');
+            $Doctor=$entityManage->getRepository(Doctor::class)->find($DoctorId);
+            $Appointment->setDoctor($Doctor);
+
+            //Patient
+            $patientId = $session->get('patient_id');
+            $Patient=$entityManage->getRepository(Patient::class)->find($patientId);
+            $Appointment->setPatient($Patient);
+             //dd($Appointment);
+            if($Appointment){
+                $entityManage->persist($Appointment);
+                $entityManage->flush();
+                return $this->redirectToRoute('rdv_index');
+            }
+        }
 
 
+
+
+
+    }
+
+    #[Route('/rdv/delete/{id}', name: 'rdvDelete')]
+    public function deleteRdv($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $appointment = $entityManager->getRepository(Appointment::class)->find($id);
+
+        if (!$appointment) {
+            throw $this->createNotFoundException('Appointment not found');
+        }
+
+        $entityManager->remove($appointment);
+        $entityManager->flush();
+        return $this->redirectToRoute('rdv_index');
+    }
 }

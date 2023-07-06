@@ -41,7 +41,7 @@
                                         {{ appointment.doctor.nom }}
                                     </td>
                                     <td>
-                                     EE
+                                        {{ appointment.createdAt|date('Y-m-d') }}  {{ appointment.heureDebut|date('H:i') }}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">

@@ -18,7 +18,7 @@ class TypeRdv
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'typeRdv', targetEntity: appointment::class)]
+    #[ORM\OneToMany(mappedBy: 'typeRdv', targetEntity: Appointment::class)]
     private Collection $appointment;
 
     public function __construct()

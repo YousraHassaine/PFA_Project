@@ -13,6 +13,7 @@ class TypeRDVController extends AbstractController
     public function PrendreRdvType(TypeRdvRepository $typeRdvRepository): Response
     {
         $typesRdv=$typeRdvRepository->findAll();
+
         return $this->render('type_rdv/index.html.twig', [
             'typeRdvs' => $typesRdv,
         ]);

@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -142,9 +143,10 @@ class DoctorController extends AbstractController
 
 
     #[Route('/doctor/detail/{id}', name: 'detail')]
-    public function getDoctorDetail(int $id, DoctorRepository $DoctorRepository): Response
+    public function getDoctorDetail(SessionInterface $session , int $id, DoctorRepository $DoctorRepository): Response
     {
         $Details = $DoctorRepository->find($id);
+        $session->set('Doctor', $Details);
         //dd($Details);
         return $this->render('doctor/detail.html.twig',[
             "Details" => $Details
