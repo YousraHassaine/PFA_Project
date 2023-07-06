@@ -39,11 +39,11 @@
                                         <img class="rounded-circle header-profile-user  h-25" src="{{asset('assets/img/'~appointment.Doctor.photp)}}" alt="">    {{ appointment.doctor.nom }}
                                     </td>
                                     <td>
-                                        {{ appointment.createdAt|date('Y-m-d') }}  {{ appointment.heureDebut|date('H:i') }}
+                                        {{ appointment.createdAt|date('Y-m-d\\TH:i')  }}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <a href="" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                            <a href="{{ path('rdvupdate', {'id': appointment.id}) }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
                                             <a href="{{ path('rdvDelete', {'id': appointment.id}) }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
                                         </div>
                                     </td>

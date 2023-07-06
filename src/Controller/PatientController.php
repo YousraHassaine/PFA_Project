@@ -82,4 +82,5 @@ class PatientController extends AbstractController
         $entityManage->flush();
         return $this->render('doctor/register.html.twig');
     }
+
 }

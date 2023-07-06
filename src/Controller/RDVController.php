@@ -98,11 +98,7 @@ class RDVController extends AbstractController
                 return $this->redirectToRoute('rdv_index');
             }
         }
-
-
-
-
-
+        return $this->redirectToRoute('rdv_index');
     }
 
     #[Route('/rdv/delete/{id}', name: 'rdvDelete')]
@@ -117,6 +113,41 @@ class RDVController extends AbstractController
 
         $entityManager->remove($appointment);
         $entityManager->flush();
+        return $this->redirectToRoute('rdvCreate');
+    }
+    #[Route('/rdv/update/{id}', name: 'rdvupdate')]
+    public
+    function updateRdvForm($id,SessionInterface $session): Response
+    {
+
+        if ($session->has('patient_id')) {
+            $entityManager = $this->entityManager;
+            $appointment = $entityManager->getRepository(Appointment::class)->find($id);
+            return $this->render('rdv/update.html.twig', [
+                'appointment' => $appointment,
+            ]);
+        }
+
+        return $this->render('Patient/login.html.twig');
+    }
+    #[Route('/rdv/AddPut/{id}', name: 'PrendreRdvUpdate',methods: "POST")]
+    public function PrendreRdvupdate($id, SessionInterface $session,Request $request): Response
+    {
+        //dd($request);
+        if ($session->has('patient_id')) {
+            // dd($request);
+            $entityManager = $this->entityManager;
+            $Appointment = $entityManager->getRepository(Appointment::class)->find($id);
+            //dd($Appointment);
+            if($Appointment){
+                $createdAt = new \DateTimeImmutable(($request->request->get("Date")));
+                $Appointment->setCreatedAt($createdAt);
+                $entityManager->persist($Appointment);
+                $entityManager->flush();
+                return $this->redirectToRoute('rdv_index');
+            }
+        }
         return $this->redirectToRoute('rdv_index');
     }
+
 }
