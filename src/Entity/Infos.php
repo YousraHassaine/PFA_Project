@@ -17,6 +17,11 @@ class Infos
     #[ORM\Column(length: 255)]
     private ?string $carte = null;
 
+
+
+
+
+
     #[ORM\Column(length: 255)]
     private ?string $presentation = null;
 
