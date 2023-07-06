@@ -25,13 +25,11 @@ class Patient extends User
     #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Notice::class, orphanRemoval: true)]
     private Collection $Notice;
 
-    #[ORM\OneToMany(mappedBy: 'Patient', targetEntity: Appointment::class)]
-    private Collection $appointments;
+
 
     public function __construct()
     {
         $this->Notice = new ArrayCollection();
-        $this->appointments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,33 +90,6 @@ class Patient extends User
 
         return $this;
     }
-    /**
-     * @return Collection<int, Appointment>
-     */
-    public function getAppointments(): Collection
-    {
-        return $this->appointments;
-    }
 
-    public function addAppointment(Appointment $appointment): static
-    {
-        if (!$this->appointments->contains($appointment)) {
-            $this->appointments->add($appointment);
-            $appointment->setPatient($this);
-        }
 
-        return $this;
-    }
-
-    public function removeAppointment(Appointment $appointment): static
-    {
-        if ($this->appointments->removeElement($appointment)) {
-            // set the owning side to null (unless already changed)
-            if ($appointment->getPatient() === $this) {
-                $appointment->setPatient(null);
-            }
-        }
-
-        return $this;
-    }
 }

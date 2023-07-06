@@ -38,6 +38,15 @@ class AppointmentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findAppointmentsByPatient(Patient $patient): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.Patient = :patient')
+            ->setParameter('patient', $patient)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 //    /**
 //     * @return Appointment[] Returns an array of Appointment objects

@@ -36,9 +36,12 @@ class PatientController extends AbstractController
         $password= $request->request->get("password");
         $entityManage=$this->entityManager;
         $patient = $entityManage->getRepository(Patient::class)->findOneBy(['Login' => $login, 'password' => $password]);
-        //dd($patient);
+        //dd($patient);*
+       // dd($patient);
         if($patient!=null){
-            $session->set('patient_id', $patient->getId());
+
+            $session->set('patient_id', $patient);
+            //dd($session->get('patient_id'));
             return $this->render('test/index.html.twig');
         }
         return $this->render('Patient/login.html.twig');
