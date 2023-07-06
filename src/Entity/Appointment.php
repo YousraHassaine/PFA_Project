@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AppointmentRepository::class)]
 class Appointment
-{   
+{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -106,7 +106,10 @@ class Appointment
 
         return $this;
     }
+<<<<<<< Updated upstream
 
+   
+=======
     public function getPatient(): ?Patient
     {
         return $this->Patient;
@@ -117,7 +120,12 @@ class Appointment
 
         return $this;
     }
+    
 
+    
+
+    
+>>>>>>> Stashed changes
     public function getDoctor(): ?Doctor
     {
         return $this->Doctor;
@@ -130,7 +138,17 @@ class Appointment
         return $this;
     }
 
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
 
+    public function setPatient(?Patient $Patient): static
+    {
+        $this->patient = $Patient;
+
+        return $this;
+    }
 
     
 }
