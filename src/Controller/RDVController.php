@@ -123,6 +123,7 @@ class RDVController extends AbstractController
         if ($session->has('patient_id')) {
             $entityManager = $this->entityManager;
             $appointment = $entityManager->getRepository(Appointment::class)->find($id);
+            //dd($appointment);
             return $this->render('rdv/update.html.twig', [
                 'appointment' => $appointment,
             ]);
