@@ -26,7 +26,7 @@ class Appointment
     #[ORM\ManyToOne(inversedBy: 'appointment')]
     private ?TypeRdv $typeRdv = null;
 
-   
+   ///
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
     private ?Doctor $Doctor = null;

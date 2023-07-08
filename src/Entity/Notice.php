@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NoticeRepository::class)]
 class Notice
-{
+{//
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

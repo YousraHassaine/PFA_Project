@@ -14,7 +14,7 @@ class Speciality
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+///
     #[ORM\Column(length: 255)]
     private ?string $nomSpeciality = null;
 
