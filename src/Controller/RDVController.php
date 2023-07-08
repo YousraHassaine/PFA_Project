@@ -116,8 +116,7 @@ class RDVController extends AbstractController
         return $this->redirectToRoute('rdvCreate');
     }
     #[Route('/rdv/update/{id}', name: 'rdvupdate')]
-    public
-    function updateRdvForm($id,SessionInterface $session): Response
+    public function updateRdvForm($id,SessionInterface $session): Response
     {
 
         if ($session->has('patient_id')) {
