@@ -14,7 +14,7 @@
     <!-- ========== Page Title ========== -->
     <title>MediHub - Medical & Health Template</title>
  
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" integrity="sha512-MQXduO8IQnJVq1qmySpN87QQkiR1bZHtorbJBD0tzy7/0U9+YIC93QWHeGTEoojMVHWWNkoCp8V6OzVSYrX0oQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     <!-- ========== Start Stylesheet ========== -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -79,19 +79,7 @@
     <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootsnav.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <script>
-$(function() {
-  $('input[name="daterange"]').daterangepicker({
-    opens: 'left'
-  }, function(start, end, label) {
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-  });
-});
-</script>
+ 
 </body>
 
 </html>

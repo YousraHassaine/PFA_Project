@@ -140,9 +140,43 @@
 
 
 
-<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+<div id="dateRangeContainer"></div>
 
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js" integrity="sha512-K/oyQtMXpxI4+K0W7H25UopjM8pzq0yrVdFdG21Fh5dBe91I40pDd9A4lzNlHPHBIP2cwZuoxaUSX0GJSObvGA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/fr.min.js" integrity="sha512-jV/jfVQ1UsjtjIuGrfA/EdXBPxC2FstPOlyHi281QkuH6hxpgMCDboW2zirI8ErbSQUQmcZBD64x15dHbSKonw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+$(function() {
+  // Create a container element
+  var container = document.getElementById('dateRangeContainer');
+
+  // Initialize Flatpickr
+  var picker = flatpickr(container, {
+    inline: true,
+    mode: 'multiple',
+    defaultDate: [ // <- had default date c'est un tableau li kay accapeter des dates  kima raki tchufi
+    // donc li khassk hiya t inserer un tableau dial les dates f la bdd w ki tbghi trecupereh hna
+    // ghadi diri haka defaultDate: {{ Detail.info.appointmentsArray }}
+      new Date("2023-04-04"),  // July 1, 2023
+      new Date("2023-04-07"),  // July 5, 2023
+      new Date("2023-04-25")  // July 10, 2023
+    ],
+    locale: 'fr',
+    onChange: function(selectedDates) {
+      var datesText = selectedDates.map(function(date) {
+        return date.toLocaleDateString();
+      }).join(', ');
+
+      console.log("Selected dates: " + datesText);
+    }
+  });
+});
+
+</script>
 {% endblock %}
