@@ -78,7 +78,7 @@ class Patient extends User
 
         return $this;
     }
-
+//ToDO
     public function removeNotice(Notice $notice): self
     {
         if ($this->Notice->removeElement($notice)) {
