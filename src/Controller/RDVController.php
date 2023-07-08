@@ -113,11 +113,9 @@ class RDVController extends AbstractController
 
         $entityManager->remove($appointment);
         $entityManager->flush();
-        return $this->redirectToRoute('rdv_index');
-
+        return $this->redirectToRoute('rdvCreate');
     }
     #[Route('/rdv/update/{id}', name: 'rdvupdate')]
-
     public function updateRdvForm($id,SessionInterface $session): Response
     {
 
@@ -150,7 +148,5 @@ class RDVController extends AbstractController
         }
         return $this->redirectToRoute('rdv_index');
     }
-
-
 
 }
