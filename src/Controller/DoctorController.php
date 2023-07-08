@@ -181,7 +181,7 @@ class DoctorController extends AbstractController
             ]);
         }
         return $this->redirectToRoute("loginDoctor");
-    }
+    }       
     #[Route('/doctor/update/{id}', name: 'updateAppointment')]
     public function updateAppointment(AppointmentRepository $appointmentRepository, $id):Response{
         //$appointment = $this->entityManager->getRepository(Appointment::class)->find($id);
