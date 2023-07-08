@@ -173,6 +173,7 @@ class DoctorController extends AbstractController
     #[Route('/doctor/rdv', name: 'rdvlist')]
     public function rdvList(SessionInterface $session,AppointmentRepository $appointmentRepository):Response{
         if($session->has('doctor')){
+            //////
             $doctor = $session->get('doctor');
             $appointments = $appointmentRepository->findAll();
            // dd($appointments);
