@@ -118,8 +118,13 @@ class RDVController extends AbstractController
     }
     #[Route('/rdv/update/{id}', name: 'rdvupdate')]
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public function updateRdvForm($id,SessionInterface $session): Response
+=======
+    public
+    function updateRdvForm($id,SessionInterface $session): Response
+>>>>>>> parent of 0521d96 (Merge branch 'master' of https://github.com/ikc20/projet_pfa)
 =======
     public
     function updateRdvForm($id,SessionInterface $session): Response
