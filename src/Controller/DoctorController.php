@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Patient;
 use App\Entity\TypeRdv;
+use App\Repository\AppointmentRepository;
 use DateTimeImmutable;
 use App\Entity\Doctor;
 use App\Entity\Speciality;
@@ -11,6 +13,7 @@ use App\Repository\SpecialityRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\DoctorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +39,20 @@ class DoctorController extends AbstractController
     #[Route('/Doctor/login', name: 'loginDoctor')]
     public function login(): Response
     {
+        return $this->render('doctor/login.html.twig');
+    }
+    #[Route('/Doctor/loginPost', name: 'loginDoctorPost',methods: "POST")]
+    public function loginPost(SessionInterface $session, Request $request): Response
+    {
+        $login= $request->request->get("login");
+        $password= $request->request->get("password");
+        $entityManage=$this->entityManager;
+        $doctor = $entityManage->getRepository(Doctor::class)->findOneBy(['Login' => $login, 'password' => $password]);
+
+        if($doctor){
+            $session->set('doctor', $doctor);
+            return $this->redirectToRoute("rdvlist");
+        }
         return $this->render('doctor/login.html.twig');
     }
     #[Route('/Doctor/register', name: 'registerDoctorForm')]
@@ -118,6 +135,7 @@ class DoctorController extends AbstractController
     {
         return $this->render('doctor/trouverDoctor.html.twig');
     }
+
     /**
      * action to get all specialities
      * 
@@ -152,5 +170,45 @@ class DoctorController extends AbstractController
             "Details" => $Details
         ]);
     }
+    #[Route('/doctor/rdv', name: 'rdvlist')]
+    public function rdvList(SessionInterface $session):Response{
+        if($session->has('doctor')){
+            $doctor = $session->get('doctor');
+            $appointments = $this->entityManager->getRepository(Appointment::class)->findBy(['Doctor' => $doctor]);
+           // dd($appointments);
+            return $this->render("doctor/listeRdv.html.twig",[
+                'appointments' => $appointments,
+            ]);
+        }
+        return $this->redirectToRoute("loginDoctor");
+    }
+    #[Route('/doctor/update/{id}', name: 'updateAppointment')]
+    public function updateAppointment(AppointmentRepository $appointmentRepository, $id):Response{
+        //$appointment = $this->entityManager->getRepository(Appointment::class)->find($id);
+        //dd($appointment);
+        $appointment=$appointmentRepository->find($id);
+        return $this->render("doctor/updateAppointment.html.twig",[
+            'appointment' => $appointment,
+        ]);
+    }
+    #[Route('/doctor/updatePost/{id}', name: 'DoctorRdvUpdate',methods: "POST")]
+    public function PrendreRdvupdate($id,Request $request): Response
+    {
+        //dd($request);
+
+            // dd($request);
+            $entityManager = $this->entityManager;
+            $Appointment = $entityManager->getRepository(Appointment::class)->find($id);
+            //dd($Appointment);
+            if($Appointment){
+                $createdAt = new \DateTimeImmutable(($request->request->get("Date")));
+                $Appointment->setCreatedAt($createdAt);
+                $entityManager->persist($Appointment);
+                $entityManager->flush();
+                return $this->redirectToRoute('rdvlist');
+            }
+        return $this->redirectToRoute('loginDoctor');
+    }
+
 
 }
