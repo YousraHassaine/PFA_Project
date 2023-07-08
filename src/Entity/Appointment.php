@@ -32,8 +32,9 @@ class Appointment
     private ?Doctor $Doctor = null;
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
-    private ?Patient $Patient = null;   
+    private ?Patient $Patient = null;
 
+    //TODO
     //Atribut chadeau
     private ?int $patient_id;
 
