@@ -150,5 +150,24 @@ class RDVController extends AbstractController
         }
         return $this->redirectToRoute('rdv_index');
     }
+    #[Route('/rdv/statistiques', name: 'rdvStatistiques')]
+    public function statistiques (AppointmentRepository $appointmentRepository,Request $request): Response
+    {
+        $session = $request->getSession();
+        $doctor = $session->get('doctor');
+        $doctorId = $doctor->getId();
+
+        $year = 2023; // Année souhaitée
+
+        $results = $appointmentRepository->findAppointmentsByDoctor($year,$doctorId);
+
+
+        // Affichage des résultats dans une vue
+        return $this->render('test/index.html.twig', [
+            'results' => $results,
+            'year' => $year,
+        ]);
+
+    }
 
 }

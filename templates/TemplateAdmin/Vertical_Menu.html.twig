@@ -33,17 +33,36 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" data-key="t-menu">Menu</li>
+                {% if app.session.get('doctor') is defined and app.session.get('doctor') is not empty %}
 
-                <li class="menu-title" data-key="t-applications">Applications</li>
+                <li class="menu-title" data-key="t-applications">Doctor</li>
 
                 <li>
-                    <a href="{{ path('rdv_index') }}" >
+                    <a href="{{ path('rdvlist') }}" >
                         <i class="bx bx-buildings nav-icon"></i>
                         <span class="menu-item" data-key="t-calendar">RDV</span>
                     </a>
                 </li>
+                    <li>
+                        <a href="{{ path('rdvStatistiques') }}" >
+                            <i class="bx bx-stats nav-icon"></i>
+                            <span class="menu-item" data-key="t-calendar">Statistiques</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="menu-title" data-key="t-applications">Patient</li>
+
+                    <li>
+                        <a href="{{ path('rdv_index') }}" >
+                            <i class="bx bx-buildings nav-icon"></i>
+                            <span class="menu-item" data-key="t-calendar">RDV</span>
+                        </a>
+                    </li>
+                {% endif %}
+
 
             </ul>
+
         </div>
 
     </div>

@@ -1,4 +1,6 @@
 <header id="page-topbar">
+
+
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
@@ -26,8 +28,6 @@
                 <i class="fa fa-fw fa-bars font-size-16"></i>
             </button>
 
-
-
         </div>
         <div class="d-flex">
             <div class="dropdown d-inline-block d-block d-lg-none">
@@ -36,16 +36,36 @@
                     <i class="bx bx-search icon-sm"></i>
                 </button>
             </div>
-            <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{ asset('Admin/assets/images/users/avatar-1.jpg') }}"
-                         alt="Header Avatar">
-                    <span class="ms-2 d-none d-xl-inline-block user-item-desc">
-                                <span class="user-name"> </span>
+
+            {% if app.session.get('doctor') is defined and app.session.get('doctor') is not empty %}
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="{{ asset('assets/img/' ~ app.session.get('doctor').photp) }}" />
+
+
+                        <span class="ms-2 d-none d-xl-inline-block user-item-desc">
+                                <span class="user-name"> {{ app.session.get('doctor').Nom }} {{ app.session.get('doctor').Prenom}} </span>
                             </span>
-                </button>
-            </div>
+                    </button>
+                </div>
+            {% else %}
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="{{ asset('assets/img/' ~ app.session.get('patient_id').photp) }}" />
+
+
+                        <span class="ms-2 d-none d-xl-inline-block user-item-desc">
+                                <span class="user-name"> {{ app.session.get('patient_id').Nom }} {{ app.session.get('patient_id').Prenom}} </span>
+                            </span>
+                    </button>
+                </div>
+            {% endif %}
+
+
+
+
         </div>
     </div>
 </header>

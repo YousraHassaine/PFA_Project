@@ -39,15 +39,8 @@ class AppointmentRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function findAppointmentsByPatient(Patient $patient): array
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.Patient = :patient')
-            ->setParameter('patient', $patient)
-            ->getQuery()
-            ->getResult();
-    }
-    public function countAppointmentsByMonth(EntityManagerInterface $entityManager, int $year)
+
+    public function findAppointmentsByPatient(EntityManagerInterface $entityManager, int $year)
     {
         $connection = $entityManager->getConnection();
 
@@ -64,6 +57,27 @@ class AppointmentRepository extends ServiceEntityRepository
         $results = $statement->fetchAllAssociative(); // Utilisez fetchAllAssociative() ou fetchAllNumeric() selon vos besoins
 
         return $results;
+    }
+
+    public function findAppointmentsByDoctor(int $year,int $doctorId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT COUNT(a.id) as totalRdv, MONTH(a.created_at) as mois
+        FROM appointment a
+        WHERE YEAR(a.created_at) = :year
+        AND a.doctor_id= :doctor_id
+        GROUP BY mois
+         ';
+
+        $resultSet = $conn->executeQuery($sql, [
+            'year' => $year,
+            'doctor_id' => $doctorId, // Replace with the actual patient ID you want to search by
+        ]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
     }
 
 
