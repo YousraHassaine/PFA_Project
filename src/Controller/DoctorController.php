@@ -176,7 +176,7 @@ class DoctorController extends AbstractController
             //////
             $doctor = $session->get('doctor');
             $appointments = $appointmentRepository->findAll();
-           // dd($appointments);
+            //dd($appointments);
             return $this->render("doctor/listeRdv.html.twig",[
                 'appointments' => $appointments,
             ]);
