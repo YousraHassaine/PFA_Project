@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Appointment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -45,6 +46,24 @@ class AppointmentRepository extends ServiceEntityRepository
             ->setParameter('patient', $patient)
             ->getQuery()
             ->getResult();
+    }
+    public function countAppointmentsByMonth(EntityManagerInterface $entityManager, int $year)
+    {
+        $connection = $entityManager->getConnection();
+
+        $sql = "
+        SELECT COUNT(a.id) as totalRdv, MONTH(a.created_at) as mois
+        FROM appointment a
+        WHERE YEAR(a.created_at) = :year
+        GROUP BY mois
+    ";
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('year', $year);
+        $statement->execute();
+
+        $results = $statement->fetchAllAssociative(); // Utilisez fetchAllAssociative() ou fetchAllNumeric() selon vos besoins
+
+        return $results;
     }
 
 

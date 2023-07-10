@@ -1,53 +1,48 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>{% block title %}Welcome!
-        {% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Gestion des rendez-vous médicaux" name="HASSAINE YOUSRA CHAHDI IKRAM" />
-    <!-- Cdn Css -->
-    {% include('TemplateAdmin/Cdn_Template_Admin/CSS/css.html.twig') %}
+{% extends 'base.html.twig' %}
 
-    {% block stylesheets %}
+{% block title %}Rdv{% endblock %}
 
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-</head>
-
-<body data-topbar="dark">
-
-<!-- Begin page -->
-<div id="layout-wrapper">
-
-
-{% include('TemplateAdmin/Cdn_Template_Admin/Header.html.twig') %}
-
-{% include('TemplateAdmin/Vertical_Menu.html.twig') %}
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                <!--Add Row-->
-
-                {% block body %}
-                {% endblock %}
-
-
-            </div>
-        </div>
-    {% include('TemplateAdmin/Cdn_Template_Admin/Fotter.html.twig') %}
+{% block body %}
+    <div class="col-md-10 d-flex flex-center-start">
+        <canvas id="appointmentsChart"></canvas>
     </div>
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var results = {{ results | json_encode()|raw }};
 
+            var labels = results.map(function(result) {
+                return result.mois;
+            });
 
+            var data = results.map(function(result) {
+                return result.totalRdv;
+            });
 
-{% include('TemplateAdmin/Cdn_Template_Admin/JS/js.html.twig') %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+            var ctx = document.getElementById('appointmentsChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de rendez-vous',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}
-</body>
-
-</html>
