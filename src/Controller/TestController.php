@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
@@ -25,9 +27,16 @@ class TestController extends AbstractController
             'year' => $year,
         ]);
     }
+    #[Route('/email')]
+    public function sendEmail(MailerInterface $mailer): Response
+    {
+        $email = (new Email())
+            ->from('achraf.mimouni.test@gmail.com')
+            ->to('yousrahassaine99@gmail.com ')
+            ->subject('Time for Symfony Mailer!')
+            ->html('<p>La7nouk w  Hwisine !</p>');
+        $mailer->send($email);
 
-
-
-
-
+       return  $this->redirectToRoute('app_test');
+    }
 }
