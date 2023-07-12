@@ -2,6 +2,7 @@
 namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\DoctorRepository;
@@ -17,6 +18,14 @@ class HomeController extends AbstractController
         return $this->render('home.html.twig');
     }
 
+    #[Route('/Logout', name:'Logout')]
+    public function Logout(SessionInterface $session): Response
+    {
+        $session->clear();
+        return $this->redirectToRoute("loginPatient");
+    }
+
+
 
     #[Route('/doctors', name:'home.recherche')]
     public function recherche(Request $request, DoctorRepository $doctoor ): Response
@@ -31,6 +40,7 @@ class HomeController extends AbstractController
        ]);
 
     }
+
 
 
 
