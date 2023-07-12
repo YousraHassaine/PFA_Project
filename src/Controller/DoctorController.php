@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -193,19 +195,31 @@ class DoctorController extends AbstractController
         ]);
     }
     #[Route('/doctor/updatePost/{id}', name: 'DoctorRdvUpdate',methods: "POST")]
-    public function PrendreRdvupdate($id,Request $request): Response
+    public function PrendreRdvupdate(MailerInterface $mailer,$id,Request $request): Response
     {
         //dd($request);
 
             // dd($request);
             $entityManager = $this->entityManager;
             $Appointment = $entityManager->getRepository(Appointment::class)->find($id);
-            //dd($Appointment);
+            $AncienneDate =$Appointment->getCreatedAt();
             if($Appointment){
                 $createdAt = new \DateTimeImmutable(($request->request->get("Date")));
                 $Appointment->setCreatedAt($createdAt);
                 $entityManager->persist($Appointment);
                 $entityManager->flush();
+               // dd();
+                //Todo Send Email
+                $html = '<p>Ancienne date ' . $AncienneDate->format('Y-m-d H:i:s') . ' Nouvelle Date ' . $createdAt->format('Y-m-d H:i:s') . '</p>';
+
+                $email = (new Email())
+                    ->from('achraf.mimouni.test@gmail.com')
+                    ->to($Appointment->getPatient()->getEmail())
+                    ->subject('Changement de date rendez-vous')
+                    ->html($html);
+
+                $mailer->send($email);
+
                 return $this->redirectToRoute('rdvlist');
             }
         return $this->redirectToRoute('loginDoctor');

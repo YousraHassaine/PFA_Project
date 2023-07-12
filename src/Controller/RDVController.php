@@ -163,7 +163,7 @@ class RDVController extends AbstractController
 
 
         // Affichage des résultats dans une vue
-        return $this->render('test/index.html.twig', [
+        return $this->render('statistiques/statistiques.html.twig', [
             'results' => $results,
             'year' => $year,
         ]);
