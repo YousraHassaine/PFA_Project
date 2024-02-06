@@ -13,7 +13,6 @@ use App\Repository\SpecialityRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\DoctorRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -160,8 +159,6 @@ class DoctorController extends AbstractController
                 "subscriptions" => $subscriptions
             ]);
     }
-
-
     #[Route('/doctor/detail/{id}', name: 'detail')]
     public function getDoctorDetail(SessionInterface $session , int $id, DoctorRepository $DoctorRepository): Response
     {

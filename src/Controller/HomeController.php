@@ -25,8 +25,6 @@ class HomeController extends AbstractController
         return $this->redirectToRoute("loginPatient");
     }
 
-
-
     #[Route('/doctors', name:'home.recherche')]
     public function recherche(Request $request, DoctorRepository $doctoor ): Response
     {
